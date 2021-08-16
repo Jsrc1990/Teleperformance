@@ -1,0 +1,150 @@
+<h1 id="tableLabel">Usuarios</h1>
+
+<p *ngIf="!users"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="users" style="text-align:center;">
+  <thead>
+    <tr>
+      <th>Identification Type</th>
+      <th>Identification Number</th>
+      <th>Company Name</th>
+      <th>First Name</th>
+      <th>Second Name</th>
+      <th>Fist Last Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.identificationType.name }}</td>
+      <td>{{ user.identificationNumber }}</td>
+      <td>{{ user.companyName }}</td>
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.secondName }}</td>
+      <td>{{ user.fistlastName }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <h3 style="font-weight:bold;">Inscripción al servicio:</h3>
+  <hr />
+  <p>Ingrese el NIT de la persona natural o jurídica para la que realizará el trámite, sin incluir el digito de verificación. Luego seleccione <strong>Continuar</strong> para completar su solicitud.</p>
+  <label>N.I.T.</label>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="id" required maxlength="15" minlength="6" />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-2">
+    </div>
+    <div class="form-group col-md-5">
+      <input type="button" value="Continuar >" (click)="validateUser(id)" class="form-control form-control-lg btn btn-danger" />
+    </div>
+    <div class="form-group col-md-5">
+      <input type="button" value="< Regresar" (click)="validateUser(id)" class="form-control form-control-lg btn btn-dark" />
+    </div>
+  </div>
+</div>
+
+<br />
+
+<div>
+  <h3 style="font-weight:bold;">Datos de la persona natural o jurídica que solicita el servicio de trámites virtuales</h3>
+  <hr />
+  <div style="background-color: #CFECF0; padding:10px 10px 5px 10px; border-radius:8px;">
+    <p>
+      La empresa se encuentra registrada en la Cámara de Comercio de Medellín para Antioquia. Para acceder al servicio de tramites Virtuales se utilizarán los datos reportados en el registro.
+      <br />
+      Los campos marcados con asterisco (*) son obligatorios.
+    </p>
+  </div>
+  <br />
+  <!--NATURALEZA-->
+  <label>Naturaleza: <strong style="color:red;">*</strong></label>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="id" />
+    </div>
+  </div>
+  <!--NOMBRE / RAZÓN SOCIAL-->
+  <label>Nombre/Razón Social: <strong style="color:red;">*</strong></label>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.companyName" />
+    </div>
+  </div>
+  <!--VIA-->
+  <div class="form-row">
+    <!--VIA-->
+    <div class="form-group col-md-2">
+      <label>Via</label>
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.via" />
+    </div>
+    <!--NRO-->
+    <div class="form-group col-md-1">
+      <label>Nro <strong style="color:red;">*</strong></label>
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.nro1" />
+    </div>
+    <!--LETRA-->
+    <div class="form-group col-md-1">
+      <label>Letra</label>
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.letra1" />
+    </div>
+    <!--NRO-->
+    <div class="form-group col-md-1">
+      <label>Nro <strong style="color:red;">*</strong></label>
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.nr2" />
+    </div>
+    <!--LETRA-->
+    <div class="form-group col-md-1">
+      <label>Letra</label>
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.letra2" />
+    </div>
+    <!--NRO Y COMPLEMENTOS-->
+    <div class="form-group col-md-6">
+      <label>Nro y complementos <strong style="color:red;">*</strong></label>
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.nroycomplementos" />
+    </div>
+  </div>
+  <!--DIRECCIÓN-->
+  <label>Dirección <strong style="color:red;">*</strong></label>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.direccion" />
+    </div>
+  </div>
+  <!--MUNICIPIO-->
+  <label>Municipio <strong style="color:red;">*</strong></label>
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.municipio" />
+    </div>
+  </div>
+    <!--TELEFONO-->
+  <label>Teléfono 1 <strong style="color:red;">*</strong></label>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.telefono" />
+    </div>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-1">
+  </div>
+  <div class="form-group col-md-5">
+    <input type="button" value="Continuar >" (click)="registerUser(id)" class="form-control form-control-lg btn btn-danger" />
+  </div>
+  <div class="form-group col-md-5">
+    <input type="button" value="< Regresar" (click)="registerUser(id)" class="form-control form-control-lg btn btn-dark" />
+  </div>
+  <div class="form-group col-md-1">
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
