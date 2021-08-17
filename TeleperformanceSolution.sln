@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Front", "Front", "{45F714CA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teleperformance.Repository", "Teleperformance.Repository\Teleperformance.Repository.csproj", "{000EC5C9-0230-4D5C-AAE9-3EB312C7CC48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teleperformance.Business", "Teleperformance.Business\Teleperformance.Business.csproj", "{290FE4F0-3546-4AFE-94E9-0965C08AA788}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teleperformance.Business", "Teleperformance.Business\Teleperformance.Business.csproj", "{290FE4F0-3546-4AFE-94E9-0965C08AA788}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{35414304-8F3E-475A-9FA7-B0BE15369094}"
 EndProject

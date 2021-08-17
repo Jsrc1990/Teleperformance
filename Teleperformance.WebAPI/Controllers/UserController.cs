@@ -33,7 +33,6 @@ namespace Teleperformance.WebAPI.Controllers
         /// </summary>
         /// <param name="valor"></param>
         /// <returns>Las entidades</returns>
-        //[EnableCors("CorsPolicy")]
         [HttpGet]
         [Route("api/User/Consultar")]
         public Response<IEnumerable<User>> Consultar(string valor = "")

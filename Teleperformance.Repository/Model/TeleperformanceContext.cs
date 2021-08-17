@@ -17,8 +17,12 @@ namespace Teleperformance.Model
         {
         }
 
+        public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<IdentificationType> IdentificationTypes { get; set; }
+        public virtual DbSet<Kind> Kinds { get; set; }
+        public virtual DbSet<Municipio> Municipios { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Vium> Via { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,6 +36,62 @@ namespace Teleperformance.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+
+            modelBuilder.Entity<Contact>(entity =>
+            {
+                entity.ToTable("Contact");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(CONVERT([varchar](36),newid(),(0)))");
+
+                entity.Property(e => e.Letra1)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Letra2)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MunicipioId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nro1)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nro2)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NroyComplementos)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Telefono1)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ViaId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Municipio)
+                    .WithMany(p => p.Contacts)
+                    .HasForeignKey(d => d.MunicipioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Contact__Municip__0E6E26BF");
+
+                entity.HasOne(d => d.Via)
+                    .WithMany(p => p.Contacts)
+                    .HasForeignKey(d => d.ViaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Contact__ViaId__0D7A0286");
+            });
 
             modelBuilder.Entity<IdentificationType>(entity =>
             {
@@ -55,11 +115,55 @@ namespace Teleperformance.Model
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Kind>(entity =>
+            {
+                entity.ToTable("Kind");
+
+                entity.HasIndex(e => e.Name, "UQ__Kind__737584F60EE19AD9")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(CONVERT([varchar](36),newid(),(0)))");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Municipio>(entity =>
+            {
+                entity.ToTable("Municipio");
+
+                entity.HasIndex(e => e.Name, "UQ__Municipi__737584F6878DAC7C")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(CONVERT([varchar](36),newid(),(0)))");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("User");
 
-                entity.HasIndex(e => e.IdentificationNumber, "UQ__User__9CD146940189329A")
+                entity.HasIndex(e => e.IdentificationNumber, "UQ__User__9CD1469414AA3AFD")
                     .IsUnique();
 
                 entity.Property(e => e.Id)
@@ -69,6 +173,10 @@ namespace Teleperformance.Model
 
                 entity.Property(e => e.CompanyName)
                     .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContactId)
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Email)
@@ -93,6 +201,10 @@ namespace Teleperformance.Model
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Kind)
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.SecondLastName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -101,11 +213,41 @@ namespace Teleperformance.Model
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.HasOne(d => d.Contact)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.ContactId)
+                    .HasConstraintName("FK__User__ContactId__339FAB6E");
+
                 entity.HasOne(d => d.IdentificationType)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.IdentificationTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User__Identifica__3E52440B");
+                    .HasConstraintName("FK__User__Identifica__32AB8735");
+
+                entity.HasOne(d => d.KindNavigation)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.Kind)
+                    .HasConstraintName("FK__User__Kind__31B762FC");
+            });
+
+            modelBuilder.Entity<Vium>(entity =>
+            {
+                entity.HasIndex(e => e.Name, "UQ__Via__737584F62AF1393D")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(36)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(CONVERT([varchar](36),newid(),(0)))");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

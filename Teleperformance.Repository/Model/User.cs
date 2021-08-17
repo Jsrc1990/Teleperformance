@@ -8,6 +8,7 @@ namespace Teleperformance.Model
     public partial class User
     {
         public string Id { get; set; }
+        public string Kind { get; set; }
         public string IdentificationTypeId { get; set; }
         public string IdentificationNumber { get; set; }
         public string CompanyName { get; set; }
@@ -16,7 +17,10 @@ namespace Teleperformance.Model
         public string FirstLastName { get; set; }
         public string SecondLastName { get; set; }
         public string Email { get; set; }
+        public string ContactId { get; set; }
 
+        public virtual Contact Contact { get; set; }
         public virtual IdentificationType IdentificationType { get; set; }
+        public virtual Kind KindNavigation { get; set; }
     }
 }

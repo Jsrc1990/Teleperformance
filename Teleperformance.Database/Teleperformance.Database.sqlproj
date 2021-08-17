@@ -65,10 +65,13 @@
     <None Include="1. Database and Schemas\CreateDatabase.sql" />
     <None Include="3. Constraints\CHK_User_IdentificationType.sql" />
     <None Include="4. Data\InsertData.sql" />
-    <None Include="2. Tables\2. Contact.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2. Tables\1. IdentificationType.sql" />
-    <Build Include="2. Tables\3. User.sql" />
+    <Build Include="2. Tables\6. User.sql" />
+    <Build Include="2. Tables\4. Contact.sql" />
+    <Build Include="2. Tables\2. Via.sql" />
+    <Build Include="2. Tables\3. Municipio.sql" />
+    <Build Include="2. Tables\5. Naturaleza.sql" />
   </ItemGroup>
 </Project>

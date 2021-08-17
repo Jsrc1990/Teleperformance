@@ -1,11 +1,27 @@
-﻿--CC
+﻿INSERT IdentificationType
+VALUES ('8D048425-B821-4CA2-AEA9-9B64B036E09B', 'NIT', 'Número de Identificación Tributaria')
+
+INSERT IdentificationType
+VALUES ('32722B70-940C-4A9E-BFAF-5BA391432040', 'CC', 'Cédula de Ciudadanía')
+
+INSERT IdentificationType
+VALUES ('9B2D9580-F56F-4AA7-8FEE-0BFB986E6B9B', 'CE', 'Cédula de Extranjería')
+
+INSERT INTO Via VALUES (DEFAULT,'Carrera',NULL)
+INSERT INTO Via VALUES (DEFAULT,'Calle',NULL)
+INSERT INTO Via VALUES (DEFAULT,'Diagonal',NULL)
+
+INSERT INTO Municipio VALUES (DEFAULT,'Colombia - Antioquia - Medellín',NULL)
+
+INSERT INTO Kind VALUES (DEFAULT,'Persona Natural',NULL)
+INSERT INTO Kind VALUES (DEFAULT,'Persona Juridica',NULL)
+
+--CC
 INSERT INTO [User]
 VALUES (DEFAULT, '32722B70-940C-4A9E-BFAF-5BA391432040', '1082912982', NULL, 'Juan', 'Sebastian', 'Reyes', NULL, 'jsrc1990@hotmail.com')
-
 --NIT
 INSERT INTO [User]
 VALUES (DEFAULT, '8D048425-B821-4CA2-AEA9-9B64B036E09B', '1234567890', 'Postobón', NULL, NULL, NULL, NULL, 'CEO@Postobón.com')
-
 --CE
 INSERT INTO [User]
 VALUES (DEFAULT, '9B2D9580-F56F-4AA7-8FEE-0BFB986E6B9B', '1111111111', 'Cocacola', '', '', '', '', 'CEO@Cocacola.com')

@@ -1,6 +1,7 @@
 ﻿Create Table [User]
 (
 Id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT CONVERT(VARCHAR(36), NEWID(), 0),
+Naturaleza VARCHAR(36) REFERENCES Naturaleza(Id) ON UPDATE CASCADE NOT NULL,
 IdentificationTypeId VARCHAR(36) REFERENCES IdentificationType(Id) ON UPDATE CASCADE NOT NULL,
 IdentificationNumber VARCHAR(15) UNIQUE NOT NULL,
 CompanyName VARCHAR(100),
@@ -8,5 +9,6 @@ FirstName VARCHAR(50),
 SecondName VARCHAR(50),
 FirstLastName VARCHAR(50),
 SecondLastName VARCHAR(50),
-Email VARCHAR(50)
+Email VARCHAR(50),
+ContactId VARCHAR(36) REFERENCES Contact(Id) ON UPDATE CASCADE NOT NULL,
 )
