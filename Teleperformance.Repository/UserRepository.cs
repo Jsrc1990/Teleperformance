@@ -24,9 +24,14 @@ namespace Teleperformance.Repository
             {
                 List<User> users = null;
                 if (string.IsNullOrWhiteSpace(valor))
-                    users = TeleperformanceContext?.Users?.Include(nameof(User.IdentificationType))?.ToList();
+                    users = TeleperformanceContext?.Users?
+                        .Include(nameof(User.IdentificationType))?
+                        .Include(nameof(User.Contact))?.ToList();
                 else
-                    users = TeleperformanceContext?.Users?.Include(nameof(User.IdentificationType))?.Where(x => x.Id == valor || x.IdentificationNumber == valor)?.ToList();
+                    users = TeleperformanceContext?.Users?
+                        .Include(nameof(User.IdentificationType))?
+                        .Include(nameof(User.Contact))?
+                        .Where(x => x.Id == valor || x.IdentificationNumber == valor)?.ToList();
                 return new Response<IEnumerable<User>>()
                 {
                     HttpStatusCode = System.Net.HttpStatusCode.OK,

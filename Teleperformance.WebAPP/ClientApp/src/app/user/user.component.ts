@@ -35,58 +35,45 @@ export class UserComponent {
       }, error => console.error('Error:' + error));
     }
   }
-
-
-
-
 }
 
-//export class ServiceService {
-
-//  constructor(private http: HttpClient) { }
-//  httpOptions = {
-//    headers: new HttpHeaders({
-//      'Content-Type': 'application/json'
-//    })
-//  }
-//  getData() {
-
-//    return this.http.get('/api/Employee');  //https://localhost:44352/ webapi host url  
-//  }
-
-//  postData(formData) {
-//    return this.http.post('/api/Employee', formData);
-//  }
-
-//  putData(id, formData) {
-//    return this.http.put('/api/Employee/' + id, formData);
-//  }
-//  deleteData(id) {
-//    return this.http.delete('/api/Employee/' + id);
-//  }
-
-//}
-
+//Define el tipo de identificación
 interface IdentificationType {
   Name: string;
 }
 
-interface User {
-  Id: string;
-  IdentificationType: IdentificationType;
-  IdentificationNumber: string
-  CompanyName: string;
-  FirstName: string;
-  SecondName: string;
-  FistLastName: string;
+//Define el municipio
+interface Municipio {
+  id: string;
+  name: string;
 }
 
+//Define el contacto
+interface Contact {
+  via: string;
+  nro1: string;
+  letra1: string;
+  nr2: string;
+  letra2: string;
+  nroyComplementos: string;
+  direccion: string;
+  municipio: Municipio;
+  telefono1: string;
+}
+
+//Define el usuario
+interface User {
+  id: string;
+  identificationType: IdentificationType;
+  identificationNumber: string
+  companyName: string;
+  firstName: string;
+  secondName: string;
+  fistLastName: string;
+  contact: Contact;
+}
+
+//Define la respuesta
 interface response {
   data: User[];
 }
-
-  //constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-  //  http.get<response>('https://localhost:44358/api/user/api/user/consultar').subscribe(result => {
-  //    this.users = result.data;
-  //  }, error => console.error('Error:' + error));
-  //}

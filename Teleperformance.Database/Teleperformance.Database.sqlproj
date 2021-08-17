@@ -72,6 +72,6 @@
     <Build Include="2. Tables\4. Contact.sql" />
     <Build Include="2. Tables\2. Via.sql" />
     <Build Include="2. Tables\3. Municipio.sql" />
-    <Build Include="2. Tables\5. Naturaleza.sql" />
+    <Build Include="2. Tables\5. Kind.sql" />
   </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of (users | async)">
       <td>{{ user.identificationType.name }}</td>
       <td>{{ user.identificationNumber }}</td>
       <td>{{ user.companyName }}</td>
@@ -104,7 +104,7 @@
     <!--NRO Y COMPLEMENTOS-->
     <div class="form-group col-md-6">
       <label>Nro y complementos <strong style="color:red;">*</strong></label>
-      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.nroycomplementos" />
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.nroyComplementos" />
     </div>
   </div>
   <!--DIRECCIÓN-->
@@ -118,14 +118,14 @@
   <label>Municipio <strong style="color:red;">*</strong></label>
   <div class="form-row">
     <div class="form-group col-md-12">
-      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.municipio" />
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.municipio.name" />
     </div>
   </div>
     <!--TELEFONO-->
   <label>Teléfono 1 <strong style="color:red;">*</strong></label>
   <div class="form-row">
     <div class="form-group col-md-3">
-      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.telefono" />
+      <input type="text" class="form-control form-control-lg" [(ngModel)]="CurrentUser.contact.telefono1" />
     </div>
   </div>
 </div>
